@@ -19,17 +19,27 @@
         <div class="text-xl text-gray-700">{{ $this->product->price }}</div>
 
         <div class="mt-4">
-            {{ $this->product->description  }}
+            {{ $this->product->description }}
         </div>
 
         <div class="mt-4 space-y-4">
-            <select name="" class="block w-full rounded-md border-0 py-1.15 pl-3 pr-10 text-gray-700">
+            <select wire:model.change="variant" class="block w-full rounded-md border-0 py-1.15 pl-3 pr-10 text-gray-700">
                 @foreach($this->product->variants as $variant)
                     <option value="{{ $variant->id }}">{{ $variant->size }} / {{ $variant->color }}</option>
                 @endforeach
             </select>
 
-            <x-button>Add to cart</x-button>
+            @if($errors->has('variant'))
+                <div class="mt-2 text-red-600">{{ $errors->first('variant') }}</div>
+            @endif
+
+            <x-button
+                wire:click="addToCart"
+                wire:click.prevent="$refresh"
+                x-on:click="console.log('addToCart clicked')"
+            >
+                Add to cart
+            </x-button>
         </div>
     </div>
 </div>
