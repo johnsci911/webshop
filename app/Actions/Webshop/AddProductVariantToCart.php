@@ -9,18 +9,14 @@ class AddProductVariantToCart
 {
     public function add($variantId)
     {
-        if (Auth::guest())
-        {
-            $cart = Cart::firstOrCreate([
-                'session_id' => session()->getId(),
-            ]);
-        }
+        $cart = match(Auth::guest()) {
+            true => Cart::firstOrCreate(['session_id' => session()->getId()]),
+            false => Auth::user()->cart ?: Auth::user()->cart()->create(),
+        };
 
-        if (Auth::user())
-        {
-            $cart = Auth::user()->cart ?: Auth::user()->cart()->create();
-        }
-
-        dd($cart);
+        $cart->items()->create([
+            'product_variant_id' => $variantId,
+            'quantity' => 1,
+        ]);
     }
 }
