@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Actions\Webshop\AddProductVariantToCart;
 use Livewire\Component;
 
 class Product extends Component
@@ -19,23 +20,13 @@ class Product extends Component
         $this->variant = $this->product->variants()->value('id');
     }
 
-    public function addToCart()
+    public function addToCart(AddProductVariantToCart $cart)
     {
-        logger('addToCart method called');
+        $this->validate();
 
-        try {
-            $validatedData = $this->validate();
-
-            logger('Validation passed', $validatedData);
-
-            // Your cart logic here
-
-            $this->dispatch('cart-updated');
-            session()->flash('message', 'Product added to cart successfully!');
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            logger('Validation failed', ['errors' => $e->errors()]);
-            $this->addError('variant', $e->getMessage());
-        }
+        $cart->add(
+            variantId: $this->variant,
+        );
     }
 
     public function updateVariant()
