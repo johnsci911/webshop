@@ -6,9 +6,9 @@ use App\Factories\CartFactory;
 
 class AddProductVariantToCart
 {
-    public function add($variantId)
+    public function add($variantId, $quantity = 1, $cart = null)
     {
-        CartFactory::make()->items()->firstOrCreate(
+        ($cart ?: CartFactory::make())->items()->firstOrCreate(
             [
                 'product_variant_id' => $variantId,
                 'quantity' => 1,
@@ -16,6 +16,6 @@ class AddProductVariantToCart
             [
                 'quantity' => 0,
             ]
-        )->increment('quantity');
+        )->increment('quantity', $quantity);
     }
 }
