@@ -8,20 +8,25 @@ use Livewire\Component;
 
 class Cart extends Component
 {
+    public function getCartProperty()
+    {
+        return CartFactory::make()->loadMissing(['items', 'items.variant', 'items.product']);
+    }
+
     public function getItemsProperty(): Collection
     {
-        return CartFactory::make()->items()->with(['variant', 'product'])->get();
+        return $this->cart->items()->with(['variant', 'product'])->get();
     }
 
     public function increment($itemId)
     {
-        CartFactory::make()->items()->find($itemId)->increment('quantity');
+        $this->cart->items()->find($itemId)->increment('quantity');
         $this->dispatch('productAddedToCart');
     }
 
     public function decrement($itemId)
     {
-        $cartItem = CartFactory::make()->items()->find($itemId);
+        $cartItem = $this->cart->items()->find($itemId);
 
         if ($cartItem->quantity > 1) {
             $cartItem->decrement('quantity');
@@ -31,7 +36,7 @@ class Cart extends Component
 
     public function delete($itemId)
     {
-        CartFactory::make()->items()->where('id', $itemId)->delete();
+        $this->cart->items()->where('id', $itemId)->delete();
 
         $this->dispatch('productRemovedFromCart');
     }
