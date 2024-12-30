@@ -23,6 +23,10 @@ class CreateStripeCheckoutSession
                             'US', 'CA', 'PH', 'CH'
                         ],
                     ],
+                    'metadata' => [
+                        'user_id' => $cart->user->id,
+                        'cart_id' => $cart->id,
+                    ]
                 ],
             );
     }
