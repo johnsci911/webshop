@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Actions\Webshop\CreateStripeCheckoutSession;
 use App\Factories\CartFactory;
 use Illuminate\Support\Collection;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 class Cart extends Component
@@ -14,12 +15,14 @@ class Cart extends Component
         return $checkoutSesssion->createFromCart($this->cart);
     }
 
-    public function getCartProperty()
+    #[Computed]
+    public function cart()
     {
         return CartFactory::make()->loadMissing(['items', 'items.variant', 'items.product']);
     }
 
-    public function getItemsProperty(): Collection
+    #[Computed]
+    public function items(): Collection
     {
         return $this->cart->items()->with(['variant', 'product'])->get();
     }

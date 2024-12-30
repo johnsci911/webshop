@@ -1,21 +1,25 @@
 <x-panel title="My Orders" class="max-w-lg mx-auto mt-12">
-    <table class="w-full">
-        <thead>
-            <tr>
-                <th class="text-left">Order</th>
-                <th class="text-left">Ordered At</th>
-                <th class="text-right">Total</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($this->orders as $order)
+    @if($this->orders->count())
+        <table class="w-full">
+            <thead>
                 <tr>
-                    <td><a href="{{ route('view-order', $order->id) }}" class="underline font-bold">{{ $order->id }}</a></td>
-                    <td >{{ $order->created_at->diffForHumans() }}</td>
-                    <td class="text-right">{{ $order->amount_total }}</td>
+                    <th class="text-left">Order</th>
+                    <th class="text-left">Ordered At</th>
+                    <th class="text-right">Total</th>
+                    <th></th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach($this->orders as $order)
+                    <tr>
+                        <td><a wire:navigate href="{{ route('view-order', $order->id) }}" class="underline font-bold">{{ $order->id }}</a></td>
+                        <td >{{ $order->created_at->diffForHumans() }}</td>
+                        <td class="text-right">{{ $order->amount_total }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @else
+        No orders found.
+    @endif
 </x-panel>
