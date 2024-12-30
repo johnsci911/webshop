@@ -34,14 +34,14 @@
                             </td>
                             <td>
                                 @if($item->variant)
-                                    Size: {{ $item->variant->size ?? 'N/A' }}
+                                    {{ $item->variant->size ?? 'N/A' }}
                                 @else
                                     (No variant information)
                                 @endif
                             </td>
                             <td>
                                 @if($item->product)
-                                    Price: {{ $item->product->price ?? 'N/A' }}
+                                    {{ $item->product->price ?? 'N/A' }}
                                 @else
                                     (No price information)
                                 @endif
