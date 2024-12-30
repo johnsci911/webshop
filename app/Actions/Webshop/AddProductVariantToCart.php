@@ -11,7 +11,6 @@ class AddProductVariantToCart
         ($cart ?: CartFactory::make())->items()->firstOrCreate(
             [
                 'product_variant_id' => $variantId,
-                'quantity' => 1,
             ],
             [
                 'quantity' => 0,
