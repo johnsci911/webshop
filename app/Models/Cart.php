@@ -18,7 +18,7 @@ class Cart extends Model
     {
         return Attribute::make(
             get: function() {
-                return $this->items->reduce(function(Money $total, CartItem $item) {
+                return $this->items()->get()->reduce(function(Money $total, CartItem $item) {
                     return $total->add($item->subtotal);
                 }, new Money(0, new Currency('USD')));
             }

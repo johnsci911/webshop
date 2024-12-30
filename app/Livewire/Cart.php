@@ -28,6 +28,7 @@ class Cart extends Component
     {
         $this->cart->items()->find($itemId)->increment('quantity');
         $this->dispatch('productAddedToCart');
+        $this->cart->refresh();
     }
 
     public function decrement($itemId)
@@ -37,6 +38,7 @@ class Cart extends Component
         if ($cartItem->quantity > 1) {
             $cartItem->decrement('quantity');
             $this->dispatch('productRemovedFromCart');
+            $this->cart->refresh();
         }
     }
 
