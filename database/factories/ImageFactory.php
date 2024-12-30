@@ -17,7 +17,7 @@ class ImageFactory extends Factory
     public function definition(): array
     {
         return [
-            'path' => $this->faker->unique()->randomElement([
+            'path' => $this->faker->randomElement([
                 'media/image1.png',
                 'media/image2.png',
                 'media/image3.png',
