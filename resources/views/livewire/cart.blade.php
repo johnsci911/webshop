@@ -91,10 +91,10 @@
     <div>
         <div class="bg-white rounded-lg shadow p-5 col-span-1 flex flex-col items-center justify-center">
             @guest
-                <p class="text-center mb-4">Please <a href="{{ route('register') }}" class="underline">register</a> or <a href="{{ route('login') }}" class="underline">login</a> to checkout</p>
+                <p class="mb-4">Please <a href="{{ route('register') }}" class="underline">register</a> or <a href="{{ route('login') }}" class="underline">login</a> to checkout</p>
             @endguest
             @auth
-                <x-button class="w-full text-center" wire:click="checkout">Checkout</x-button>
+                <x-button class="w-full" wire:click="checkout">Checkout</x-button>
             @endauth
         </div>
     </div>

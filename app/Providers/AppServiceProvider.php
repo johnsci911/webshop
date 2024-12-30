@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Cashier\Cashier;
 use Laravel\Fortify\Fortify;
 use Log;
 use Money\Currencies\ISOCurrencies;
@@ -36,6 +37,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Model::unguard();
+
+        Cashier::calculateTaxes();
 
         Event::listen(Registered::class, function ($event) {
             (new CreateUserCart)->create($event->user);
