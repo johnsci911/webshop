@@ -1,5 +1,5 @@
 <div class="grid grid-cols-4 mt-12 gap-4">
-    <div class="bg-white rounded-lg shadow p-5 col-span-3">
+    <x-panel class="col-span-3">
         @if($items->isEmpty())
             <p>Your cart is empty</p>
         @else
@@ -87,15 +87,15 @@
                 </tfoot>
             </table>
         @endif
-    </div>
+    </x-panel>
     <div>
-        <div class="bg-white rounded-lg shadow p-5 col-span-1 flex flex-col items-center justify-center">
+        <x-panel class="col-span-1 flex flex-col items-center justify-center">
             @guest
                 <p class="mb-4">Please <a href="{{ route('register') }}" class="underline">register</a> or <a href="{{ route('login') }}" class="underline">login</a> to checkout</p>
             @endguest
             @auth
-                <x-button class="w-full" wire:click="checkout">Checkout</x-button>
+                <x-button class="w-full justify-center" wire:click="checkout">Checkout</x-button>
             @endauth
-        </div>
+        </x-panel>
     </div>
 </div>

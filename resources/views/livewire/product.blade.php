@@ -8,9 +8,9 @@
         <div class="grid grid-cols-4 gap-4">
             <!-- Product Details -->
             @foreach($this->product->images as $image)
-                <div class="rounded bg-white p-2 shadow">
+                <x-panel>
                     <img src="/{{ $image->path }}" @click="image = '/{{ $image->path }}'" alt="">
-                </div>
+                </x-panel>
             @endforeach
         </div>
     </div>
