@@ -14,6 +14,10 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         //
     })
+    ->withSchedule(function ($schedule) {
+        $schedule->command('app:abandoned-cart')->daily('13:00');
+        $schedule->command('app:remove-inactive-session-carts')->weekly();
+    })
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();

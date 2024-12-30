@@ -12,6 +12,8 @@ class CartItem extends Model
 {
     use HasFactory;
 
+    protected $touches = ['cart'];
+
     public function product(): HasOneThrough
     {
         return $this->hasOneThrough(
